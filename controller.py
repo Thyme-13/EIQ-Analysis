@@ -9,8 +9,9 @@ import ybc_box
 
 
 def start():
-    if not os.path.exists('cache'):
-        os.path.join(os.path.dirname(os.path.abspath(__file__)), "cache")
+    cache_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cache")
+    if not os.path.exists(cache_dir):
+        os.makedirs(cache_dir)
 
 
 def mai(sale_volume, total):
