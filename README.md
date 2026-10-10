@@ -41,6 +41,7 @@ pandas>=1.5
 matplotlib>=3.5
 pywin32>=300 * （1.0 版本限定）
 ybc-box==4.1.1 *（1.0 版本限定）
+其他详见Requests.txt(main.py 中未使用的库为打包需要，可删除)
 ```
 
 ## 安装与运行
