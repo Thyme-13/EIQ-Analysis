@@ -1,10 +1,10 @@
 import csv
 
 
-def CSV_filter(csv_path, sale_volumes, output_form=0):
-    """
-    :param sale_volumes: 商品销售量所在列的索引
-    :param csv_path: CSV文件的路径
+def CSV_filter(csv_path: str, sale_volumes: str, output_form: int = 0):
+    """CSV 数据清洗：去除销售量列中的非数值字符
+    :param csv_path: CSV 文件路径
+    :param sale_volumes: 商品销售量所在列的索引（大写字母）
     :param output_form: 输出形式 0：无输出，1：输出二维列表，2：输出路径
     """
     csv_list = []
@@ -19,14 +19,13 @@ def CSV_filter(csv_path, sale_volumes, output_form=0):
             if j not in '0123456789.-':
                 i[_sale_volumes] = i[_sale_volumes].replace(j, '')
 
-    with open(csv_path, 'w', encoding='UTF-8-SIG', newline='') as clean_file:
-        file_writer = csv.writer(clean_file)
-        file_writer.writerows(csv_list)
+    clean_file = open(csv_path, 'w', encoding='UTF-8-SIG', newline='')
+    file_writer = csv.writer(clean_file)
+    file_writer.writerows(csv_list)
+    clean_file.close()
 
     if output_form == 1:
-        del csv_path
         return csv_list
     elif output_form == 2:
-        del csv_list
         return csv_path
     return None
