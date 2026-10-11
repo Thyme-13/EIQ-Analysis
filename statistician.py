@@ -93,45 +93,4 @@ def proportion_calculation(sale_volumes, total, boundarys):
         sums = [sum_a, sum_b, sum_c]
         return lists, sums
     else:
-        a, b, c = boundarys[0][0], boundarys[0][1], boundarys[0][2]
-        boundary1 = total * a / 100
-        boundary2 = total * b / 100
-        boundary3 = total * c / 100
-        lists = [[], [], [], []]
-        flag = 0
-        for keys in sale_volumes:
-            dicts = {keys: sale_volumes[keys]}
-            if flag == 0:
-                if sale_volumes[keys] <= boundary1:
-                    lists[0].append(dicts)
-                    boundary1 -= sale_volumes[keys]
-                else:
-                    flag = 1
-                    boundary2 += boundary1
-                    lists[0].append(dicts)
-                    boundary2 -= sale_volumes[keys]
-            elif flag == 1:
-                if sale_volumes[keys] <= boundary2:
-                    lists[1].append(dicts)
-                    boundary2 -= sale_volumes[keys]
-                else:
-                    flag = 2
-                    boundary3 += boundary2
-                    lists[1].append(dicts)
-                    boundary3 -= sale_volumes[keys]
-            elif flag == 2:
-                if sale_volumes[keys] <= boundary3:
-                    lists[2].append(dicts)
-                    boundary3 -= sale_volumes[keys]
-                else:
-                    flag = 3
-                    lists[2].append(dicts)
-            else:
-                lists[3].append(dicts)
-        sum_a = len(lists[0])
-        sum_b = len(lists[1])
-        sum_c = len(lists[2])
-        sum_d = len(lists[3])
-        sums = [sum_a, sum_b, sum_c, sum_d]
-        return lists, sums
-
+        raise ValueError("不支持的分类数量，仅支持 2 类(boundary=1) 和 3 类(boundary=2)")

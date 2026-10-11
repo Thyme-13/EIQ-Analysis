@@ -6,7 +6,6 @@ import win32gui
 import win32print
 import ybc_box
 
-
 def start():
     cache_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cache")
     if not os.path.exists(cache_dir):
@@ -30,13 +29,12 @@ def mai(sale_volume, total):
 def abc_input(max_v, min_v, csv_path):
     while True:
         max_min = 'a应大于：' + str('%.4f' % max_v) + '；余下部分应大于：' + str('%.4f' % min_v)
-        flag = 0  # 循环标志
-        strs = ybc_box.multenterbox('''
+        flag = 0
+        strs = ybc_box.multenterbox(
+'''
             仅填a：A类：前a%；B类：剩余部分
             填a、b：A类：前a%；B类：a%~a%+b%；C类：剩余部分
-            均填：A类：前a%；B类：a%~a%+b%；C类：b%~b%+c%；D类：剩余部分
-            若不填a，则无效；若填a、b，则忽略c
-            ''' + max_min, ['a(必填):', 'b(选填):', 'c(选填):'])
+            ''' + max_min, ['a(必填):', 'b(选填):'])
 
         if strs is not None:
             if strs[0] == '':
@@ -45,23 +43,13 @@ def abc_input(max_v, min_v, csv_path):
                 try:
                     a = float(strs[0])
                     b = float(strs[1]) if len(strs) > 1 and strs[1] != '' else None
-                    c = float(strs[2]) if len(strs) > 2 and strs[2] != '' else None
 
                     if a > 100:
                         win32api.MessageBox(0, 'The value of a is greater than 100', 'ENTER THE CORRECT NUMBERS',
                                             win32con.MB_ICONWARNING)
                         continue
 
-                    if b is not None and c is not None:
-                        sums = round(a + b + c, 2)
-                        if sums != 100:
-                            win32api.MessageBox(0, f'Total is {sums}, must be exactly 100!',
-                                                'ENTER THE CORRECT NUMBERS',
-                                                win32con.MB_ICONWARNING)
-                            continue
-                        return [a, b, c], 3
-
-                    elif b is not None:
+                    if b is not None:
                         sums = round(a + b, 2)
                         if sums > 100:
                             win32api.MessageBox(0, f'Sum ({sums}) > 100', 'ENTER THE CORRECT NUMBERS',
@@ -79,7 +67,6 @@ def abc_input(max_v, min_v, csv_path):
             os.remove(csv_path)
             win32api.MessageBox(0, 'You shut down the program', 'PROGRAM QUIT', win32con.MB_ICONWARNING)
             sys.exit(0)
-
 def resolution():
     hDC = win32gui.GetDC(0)
     x = win32print.GetDeviceCaps(hDC, win32con.DESKTOPHORZRES)
