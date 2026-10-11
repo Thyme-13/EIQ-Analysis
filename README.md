@@ -38,9 +38,10 @@ EIQAnalysis1.1/
 - **操作系统**：Windows（依赖 win32api 获取分辨率，其他平台需适配）
 - **Python 版本**：3.8+
 - **必需依赖**：
-  - pandas>=1.5
-  - matplotlib>=3.5
-  - pywin32>=300
+  - **核心处理库**：`pandas>=1.5`, `matplotlib>=3.5`, `numpy`
+  - **Excel 解析**：`openpyxl` (读取 .xlsx 文件必需)
+  - **系统工具**：`pywin32` (Windows 平台分辨率获取)
+  - *(完整依赖清单请运行 `pip install -r requirements.txt` 进行安装)*
 
 ## 安装与运行
 
